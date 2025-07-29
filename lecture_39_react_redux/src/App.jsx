@@ -1,20 +1,18 @@
-
-import './App.css'
-import Header from './components/header/Header.jsx';
-import { Routes, Route, Link } from "react-router";
-import Home from './pages/Home.jsx';
-import ProductsPage from './pages/ProductsPage.jsx';
+import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { incrementAction, decrementAction } from './redux/action/counterActions'
 
 function App() {
-  return (
-    <>
-      <Header />
-      <Routes>
-        <Route path='/products' element={<ProductsPage />} />
-        <Route path="/" element={<Home />} />
-      </Routes>
-    </>
-  );
+	const count = useSelector(state => state)
+	const dispatch = useDispatch()
+
+	return (
+		<div style={{ textAlign: 'center', marginTop: '40px' }}>
+			<h1>Счётчик: {count}</h1>
+			<button onClick={() => dispatch(incrementAction())}>+ Добавить</button>
+			<button onClick={() => dispatch(decrementAction())}>- Убрать</button>
+		</div>
+	)
 }
 
 export default App
